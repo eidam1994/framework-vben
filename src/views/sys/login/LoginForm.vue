@@ -8,10 +8,10 @@
     v-show="getShow"
     @keypress.enter="handleLogin"
   >
-    <FormItem name="account" class="enter-x">
+    <FormItem name="username" class="enter-x">
       <Input
         size="large"
-        v-model:value="formData.account"
+        v-model:value="formData.username"
         :placeholder="t('sys.login.userName')"
         class="fix-auto-fill"
       />
@@ -48,37 +48,37 @@
       <Button type="primary" size="large" block @click="handleLogin" :loading="loading">
         {{ t('sys.login.loginButton') }}
       </Button>
-      <!-- <Button size="large" class="mt-4 enter-x" block @click="handleRegister">
+      <Button size="large" class="mt-4 enter-x" block @click="handleRegister">
         {{ t('sys.login.registerButton') }}
-      </Button> -->
+      </Button>
     </FormItem>
-    <ARow class="enter-x">
-      <ACol :md="8" :xs="24">
-        <Button block @click="setLoginState(LoginStateEnum.MOBILE)">
-          {{ t('sys.login.mobileSignInFormTitle') }}
-        </Button>
-      </ACol>
-      <ACol :md="8" :xs="24" class="!my-2 !md:my-0 xs:mx-0 md:mx-2">
-        <Button block @click="setLoginState(LoginStateEnum.QR_CODE)">
-          {{ t('sys.login.qrSignInFormTitle') }}
-        </Button>
-      </ACol>
-      <ACol :md="7" :xs="24">
-        <Button block @click="setLoginState(LoginStateEnum.REGISTER)">
-          {{ t('sys.login.registerButton') }}
-        </Button>
-      </ACol>
-    </ARow>
+    <!--    <ARow class="enter-x">-->
+    <!--      <ACol :md="8" :xs="24">-->
+    <!--        <Button block @click="setLoginState(LoginStateEnum.MOBILE)">-->
+    <!--          {{ t('sys.login.mobileSignInFormTitle') }}-->
+    <!--        </Button>-->
+    <!--      </ACol>-->
+    <!--      <ACol :md="8" :xs="24" class="!my-2 !md:my-0 xs:mx-0 md:mx-2">-->
+    <!--        <Button block @click="setLoginState(LoginStateEnum.QR_CODE)">-->
+    <!--          {{ t('sys.login.qrSignInFormTitle') }}-->
+    <!--        </Button>-->
+    <!--      </ACol>-->
+    <!--      <ACol :md="7" :xs="24">-->
+    <!--        <Button block @click="setLoginState(LoginStateEnum.REGISTER)">-->
+    <!--          {{ t('sys.login.registerButton') }}-->
+    <!--        </Button>-->
+    <!--      </ACol>-->
+    <!--    </ARow>-->
 
-    <Divider class="enter-x">{{ t('sys.login.otherSignIn') }}</Divider>
+    <!--    <Divider class="enter-x">{{ t('sys.login.otherSignIn') }}</Divider>-->
 
-    <div class="flex justify-evenly enter-x" :class="`${prefixCls}-sign-in-way`">
-      <GithubFilled />
-      <WechatFilled />
-      <AlipayCircleFilled />
-      <GoogleCircleFilled />
-      <TwitterCircleFilled />
-    </div>
+    <!--    <div class="flex justify-evenly enter-x" :class="`${prefixCls}-sign-in-way`">-->
+    <!--      <GithubFilled />-->
+    <!--      <WechatFilled />-->
+    <!--      <AlipayCircleFilled />-->
+    <!--      <GoogleCircleFilled />-->
+    <!--      <TwitterCircleFilled />-->
+    <!--    </div>-->
   </Form>
 </template>
 <script lang="ts" setup>
@@ -119,8 +119,8 @@
   const rememberMe = ref(false);
 
   const formData = reactive({
-    account: 'vben',
-    password: '123456',
+    username: '',
+    password: '',
   });
 
   const { validForm } = useFormValid(formRef);
@@ -137,7 +137,7 @@
       const userInfo = await userStore.login(
         toRaw({
           password: data.password,
-          username: data.account,
+          username: data.username,
           mode: 'none', //不要默认的错误提示
         }),
       );

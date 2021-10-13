@@ -52,9 +52,9 @@
           >
             <LoginForm />
             <ForgetPasswordForm />
-            <RegisterForm />
-            <MobileForm />
-            <QrCodeForm />
+<!--            <RegisterForm />-->
+<!--            <MobileForm />-->
+<!--            <QrCodeForm />-->
           </div>
         </div>
       </div>

@@ -14,8 +14,8 @@ import { router } from '/@/router';
 import { usePermissionStore } from '/@/store/modules/permission';
 import { RouteRecordRaw } from 'vue-router';
 import { PAGE_NOT_FOUND_ROUTE } from '/@/router/routes/basic';
-import { isArray } from '/@/utils/is';
 import { h } from 'vue';
+import Cookies from 'js-cookie';
 
 interface UserState {
   userInfo: Nullable<UserInfo>;
@@ -90,9 +90,10 @@ export const useUserStore = defineStore({
     ): Promise<GetUserInfoModel | null> {
       try {
         const { goHome = true, mode, ...loginParams } = params;
-        const data = await loginApi(loginParams, mode);
-        const { token } = data;
+        await loginApi(loginParams, mode);
+        const token = Cookies.get('satoken');
 
+        console.log(token, 'token');
         // save token
         this.setToken(token);
         return this.afterLoginAction(goHome);
@@ -125,14 +126,14 @@ export const useUserStore = defineStore({
     async getUserInfoAction(): Promise<UserInfo | null> {
       if (!this.getToken) return null;
       const userInfo = await getUserInfo();
-      const { roles = [] } = userInfo;
-      if (isArray(roles)) {
-        const roleList = roles.map((item) => item.value) as RoleEnum[];
-        this.setRoleList(roleList);
-      } else {
-        userInfo.roles = [];
-        this.setRoleList([]);
-      }
+      // const { roles = [] } = userInfo;
+      // if (isArray(roles)) {
+      //   const roleList = roles.map((item) => item.value) as RoleEnum[];
+      //   this.setRoleList(roleList);
+      // } else {
+      //   userInfo.roles = [];
+      //   this.setRoleList([]);
+      // }
       this.setUserInfo(userInfo);
       return userInfo;
     },
