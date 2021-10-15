@@ -2,7 +2,7 @@
   <div>
     <BasicTable @register="registerTable">
       <template #tableTitle>
-        <a-button type="primary" @click="handleCreate"> 新增用户</a-button>
+        <a-button type="primary" @click="handleCreate"> 新增角色</a-button>
       </template>
       <template #action="{ record }">
         <TableAction
@@ -23,25 +23,25 @@
         />
       </template>
     </BasicTable>
-    <UserDrawer @register="registerDrawer" @success="handleSuccess" />
+    <RoleDrawer @register="registerDrawer" @success="handleSuccess" />
   </div>
 </template>
 
 <script lang="ts">
   import { defineComponent } from 'vue';
-  import { columns, searchFormSchema } from './user.data';
+  import { columns, searchFormSchema } from './role.data';
   import { BasicTable, useTable, TableAction } from '/@/components/Table';
-  import { deleteUser, getUserList } from '/@/api/sys/auth';
+  import { deleteRole, getRoleList } from '/@/api/sys/auth';
   import { useDrawer } from '/@/components/Drawer';
-  import UserDrawer from './UserDrawer.vue';
+  import RoleDrawer from './RoleDrawer.vue';
 
   export default defineComponent({
-    name: 'User',
-    components: { UserDrawer, BasicTable, TableAction },
+    name: 'Role',
+    components: { RoleDrawer, BasicTable, TableAction },
     setup() {
       const [registerDrawer, { openDrawer }] = useDrawer();
       const [registerTable, { reload }] = useTable({
-        api: getUserList,
+        api: getRoleList,
         columns,
         fetchSetting: {
           sizeField: 'size',
@@ -70,7 +70,7 @@
         });
       }
 
-      function handleSuccess(record) {
+      function handleSuccess() {
         reload();
       }
 
@@ -82,7 +82,7 @@
       }
 
       function handleDelete(record: Recordable) {
-        deleteUser(record.id).then(() => {
+        deleteRole(record.id).then(() => {
           reload();
         });
       }

@@ -15,12 +15,12 @@
   import { computed, defineComponent, ref, unref } from 'vue';
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { BasicForm, useForm } from '/@/components/Form/index';
-  import { formSchema } from '/@/views/auth/user/user.data';
+  import { formSchema } from '/@/views/auth/role/role.data';
   import { message } from 'ant-design-vue';
-  import { saveUser } from '/@/api/sys/auth';
+  import { saveRole } from '/@/api/sys/auth';
 
   export default defineComponent({
-    name: 'UserDrawer',
+    name: 'RoleDrawer',
     components: {
       BasicDrawer,
       BasicForm,
@@ -50,7 +50,7 @@
         try {
           const values = await validate();
           setDrawerProps({ confirmLoading: true });
-          await saveUser({
+          await saveRole({
             ...values,
             id: rowId.value || null,
           });
@@ -62,7 +62,7 @@
         }
       }
 
-      const getTitle = computed(() => (!unref(isUpdate) ? '新增用户' : '编辑用户'));
+      const getTitle = computed(() => (!unref(isUpdate) ? '新增角色' : '编辑角色'));
 
       return {
         registerDrawer,

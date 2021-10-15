@@ -11,6 +11,9 @@ enum Api {
   UserList = '/user/list',
   SaveUser = '/user/save',
   DeleteUser = '/user/delete',
+  RoleList = '/role/list',
+  SaveRole = '/role/save',
+  DeleteRole = '/role/delete',
 }
 
 /**
@@ -53,4 +56,16 @@ export const saveUser = (params: any) => {
 
 export const deleteUser = (id) => {
   return defHttp.delete({ url: `${Api.DeleteUser}/${id}` });
+};
+
+export const getRoleList = (params: any) => {
+  return defHttp.post({ url: Api.RoleList, params });
+};
+
+export const saveRole = (params: any) => {
+  return defHttp.post({ url: Api.SaveRole, params });
+};
+
+export const deleteRole = (id) => {
+  return defHttp.delete({ url: `${Api.DeleteRole}/${id}` });
 };
