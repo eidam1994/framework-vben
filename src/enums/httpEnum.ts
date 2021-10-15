@@ -3,8 +3,9 @@
  */
 export enum ResultEnum {
   SUCCESS = 200,
-  ERROR = 0,
+  ERROR = 500,
   TIMEOUT = 401,
+  NotLogin = 502,
   TYPE = 'success',
 }
 

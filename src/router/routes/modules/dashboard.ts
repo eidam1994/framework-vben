@@ -36,7 +36,7 @@ const dashboard: AppRouteModule = {
       name: 'User',
       component: () => import('/@/views/auth/user/index.vue'),
       meta: {
-        title: t('routes.dashboard.workbench'),
+        title: t('用户管理'),
       },
     },
   ],

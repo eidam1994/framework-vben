@@ -9,6 +9,8 @@ enum Api {
   GetUserInfo = '/auth/userInfo',
   GetPermCode = '/getPermCode',
   UserList = '/user/list',
+  SaveUser = '/user/save',
+  DeleteUser = '/user/delete',
 }
 
 /**
@@ -43,4 +45,12 @@ export function doLogout() {
 
 export const getUserList = (params: any) => {
   return defHttp.post({ url: Api.UserList, params });
+};
+
+export const saveUser = (params: any) => {
+  return defHttp.post({ url: Api.SaveUser, params });
+};
+
+export const deleteUser = (id) => {
+  return defHttp.delete({ url: `${Api.DeleteUser}/${id}` });
 };
