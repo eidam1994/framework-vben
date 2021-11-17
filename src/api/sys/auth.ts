@@ -8,12 +8,16 @@ enum Api {
   Logout = '/logout',
   GetUserInfo = '/auth/userInfo',
   GetPermCode = '/getPermCode',
+  Register= '/user/register',
   UserList = '/user/list',
   SaveUser = '/user/save',
   DeleteUser = '/user/delete',
   RoleList = '/role/list',
   SaveRole = '/role/save',
   DeleteRole = '/role/delete',
+  MenuList = '/menu/list',
+  SaveMenu = '/menu/save',
+  DeleteMenu = '/menu/delete',
 }
 
 /**
@@ -46,6 +50,10 @@ export function doLogout() {
   return defHttp.get({ url: Api.Logout });
 }
 
+export const register = (params: any) => {
+  return defHttp.post({ url: Api.Register, params });
+}
+
 export const getUserList = (params: any) => {
   return defHttp.post({ url: Api.UserList, params });
 };
@@ -68,4 +76,12 @@ export const saveRole = (params: any) => {
 
 export const deleteRole = (id) => {
   return defHttp.delete({ url: `${Api.DeleteRole}/${id}` });
+};
+
+export const getMenuList = () => {
+  return defHttp.get({ url: Api.MenuList });
+};
+
+export const saveMenu = (params: any) => {
+  return defHttp.post({ url: Api.SaveMenu, params });
 };

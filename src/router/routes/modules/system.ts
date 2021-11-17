@@ -31,6 +31,15 @@ const dashboard: AppRouteModule = {
         title: '角色管理',
       },
     },
+    {
+      path: 'permission',
+      name: 'Permission',
+      component: () => import('/@/views/auth/permission/index.vue'),
+      meta: {
+        icon: 'mdi:account-lock-outline',
+        title: '权限管理',
+      },
+    },
   ],
 };
 
