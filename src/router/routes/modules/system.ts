@@ -14,16 +14,16 @@ const dashboard: AppRouteModule = {
   },
   children: [
     {
-      path: 'user',
+      path: '/user',
       name: 'User',
-      component: () => import('/@/views/auth/user/index.vue'),
+      component: '/auth/user/index.vue',
       meta: {
         icon: 'bx:bxs-user-detail',
         title: '用户管理',
       },
     },
     {
-      path: 'role',
+      path: '/role',
       name: 'Role',
       component: () => import('/@/views/auth/role/index.vue'),
       meta: {
@@ -36,7 +36,7 @@ const dashboard: AppRouteModule = {
       name: 'Permission',
       component: () => import('/@/views/auth/permission/index.vue'),
       meta: {
-        icon: 'mdi:account-lock-outline',
+        icon: 'icon-park-outline:permissions',
         title: '权限管理',
       },
     },

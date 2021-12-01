@@ -40,4 +40,10 @@ export const formSchema: FormSchema[] = [
     label: '角色描述',
     component: 'Input',
   },
+  {
+    label: ' ',
+    field: 'menuIds',
+    slot: 'menu',
+    component: 'Input',
+  },
 ];

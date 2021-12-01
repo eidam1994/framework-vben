@@ -7,7 +7,15 @@
     width="500px"
     @ok="handleSubmit"
   >
-    <BasicForm @register="registerForm" />
+    <BasicForm @register="registerForm">
+      <template #role="{ model, field }">
+        <a-select mode="multiple" v-model:value="model[field]">
+          <a-select-option v-for="item of roleList" :key="item.roleName" :value="item.id">
+            {{ item.roleName }}
+          </a-select-option>
+        </a-select>
+      </template>
+    </BasicForm>
   </BasicDrawer>
 </template>
 
@@ -16,18 +24,21 @@
   import { BasicDrawer, useDrawerInner } from '/@/components/Drawer';
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { formSchema } from '/@/views/auth/user/user.data';
-  import { message } from 'ant-design-vue';
-  import { saveUser } from '/@/api/sys/auth';
+  import { message, Select } from 'ant-design-vue';
+  import { getRoleSelect, saveUser } from '/@/api/sys/auth';
 
   export default defineComponent({
     name: 'UserDrawer',
     components: {
       BasicDrawer,
       BasicForm,
+      [Select.name]: Select,
+      ASelectOption: Select.Option,
     },
     setup(_, { emit }) {
       const isUpdate = ref(true);
       const rowId = ref('');
+      const roleList = ref<any>([]);
 
       const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
         labelWidth: 90,
@@ -38,6 +49,9 @@
       const [registerDrawer, { setDrawerProps, closeDrawer }] = useDrawerInner(async (data) => {
         resetFields();
         setDrawerProps({ confirmLoading: false });
+        if (unref(roleList.value).length === 0) {
+          roleList.value = await getRoleSelect();
+        }
         isUpdate.value = !!data?.isUpdate;
         rowId.value = data.record?.id;
         if (unref(isUpdate)) {
@@ -46,6 +60,7 @@
           });
         }
       });
+
       async function handleSubmit() {
         try {
           const values = await validate();
@@ -69,6 +84,7 @@
         registerForm,
         handleSubmit,
         getTitle,
+        roleList,
       };
     },
   });

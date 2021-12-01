@@ -8,11 +8,12 @@ enum Api {
   Logout = '/logout',
   GetUserInfo = '/auth/userInfo',
   GetPermCode = '/getPermCode',
-  Register= '/user/register',
+  Register = '/user/register',
   UserList = '/user/list',
   SaveUser = '/user/save',
   DeleteUser = '/user/delete',
   RoleList = '/role/list',
+  RoleSelect = '/role/roleList',
   SaveRole = '/role/save',
   DeleteRole = '/role/delete',
   MenuList = '/menu/list',
@@ -52,7 +53,7 @@ export function doLogout() {
 
 export const register = (params: any) => {
   return defHttp.post({ url: Api.Register, params });
-}
+};
 
 export const getUserList = (params: any) => {
   return defHttp.post({ url: Api.UserList, params });
@@ -68,6 +69,10 @@ export const deleteUser = (id) => {
 
 export const getRoleList = (params: any) => {
   return defHttp.post({ url: Api.RoleList, params });
+};
+
+export const getRoleSelect = () => {
+  return defHttp.get({ url: Api.RoleSelect });
 };
 
 export const saveRole = (params: any) => {

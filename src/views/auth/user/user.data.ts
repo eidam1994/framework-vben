@@ -76,4 +76,10 @@ export const formSchema: FormSchema[] = [
       { required: true },
     ],
   },
+  {
+    field: 'roleIds',
+    label: '角色',
+    component: 'Select',
+    slot: 'role',
+  },
 ];

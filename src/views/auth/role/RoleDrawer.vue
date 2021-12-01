@@ -7,7 +7,18 @@
     width="500px"
     @ok="handleSubmit"
   >
-    <BasicForm @register="registerForm" />
+    <BasicForm @register="registerForm">
+      <template #menu="{ model, field }">
+        <BasicTree
+          v-model:value="model[field]"
+          :treeData="treeData"
+          :replaceFields="{ title: 'menuName', key: 'id' }"
+          checkable
+          toolbar
+          title="菜单分配"
+        />
+      </template>
+    </BasicForm>
   </BasicDrawer>
 </template>
 
@@ -17,17 +28,20 @@
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { formSchema } from '/@/views/auth/role/role.data';
   import { message } from 'ant-design-vue';
-  import { saveRole } from '/@/api/sys/auth';
+  import { getMenuList, saveRole } from '/@/api/sys/auth';
+  import { BasicTree, TreeItem } from '/@/components/Tree';
 
   export default defineComponent({
     name: 'RoleDrawer',
     components: {
       BasicDrawer,
       BasicForm,
+      BasicTree,
     },
     setup(_, { emit }) {
       const isUpdate = ref(true);
       const rowId = ref('');
+      const treeData = ref<TreeItem[]>([]);
 
       const [registerForm, { resetFields, setFieldsValue, validate }] = useForm({
         labelWidth: 90,
@@ -38,6 +52,10 @@
       const [registerDrawer, { setDrawerProps, closeDrawer }] = useDrawerInner(async (data) => {
         resetFields();
         setDrawerProps({ confirmLoading: false });
+        if (unref(treeData).length === 0) {
+          const res = await getMenuList();
+          treeData.value = res;
+        }
         isUpdate.value = !!data?.isUpdate;
         rowId.value = data.record?.id;
         if (unref(isUpdate)) {
@@ -69,6 +87,7 @@
         registerForm,
         handleSubmit,
         getTitle,
+        treeData,
       };
     },
   });

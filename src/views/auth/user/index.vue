@@ -44,9 +44,9 @@
         api: getUserList,
         columns,
         fetchSetting: {
-          sizeField: 'size',
-          pageField: 'current',
-          listField: 'records',
+          sizeField: 'pageSize',
+          pageField: 'pageNum',
+          listField: 'list',
         },
         formConfig: {
           labelWidth: 120,

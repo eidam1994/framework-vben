@@ -75,4 +75,16 @@ export const formSchema: FormSchema[] = [
     component: 'InputNumber',
     required: true,
   },
+  {
+    field: 'icon',
+    label: '图标',
+    component: 'Input',
+    required: true,
+  },
+  {
+    field: 'path',
+    label: '组件路径',
+    component: 'Input',
+    required: true,
+  },
 ];
