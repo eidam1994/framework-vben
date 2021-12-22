@@ -17,7 +17,7 @@
   import { BasicForm, useForm } from '/@/components/Form/index';
   import { formSchema } from '/@/views/auth/permission/permission.data';
   import { message } from 'ant-design-vue';
-  import { getMenuList, saveMenu, saveRole } from "/@/api/sys/auth";
+  import { saveMenu } from '/@/api/sys/auth';
 
   export default defineComponent({
     name: 'PermissionDrawer',
