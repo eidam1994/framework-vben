@@ -202,6 +202,7 @@ export const usePermissionStore = defineStore({
 
           routeList = flatMultiLevelRoutes(routeList);
           routes = [PAGE_NOT_FOUND_ROUTE, ...routeList];
+          console.log(routes);
           break;
       }
 
